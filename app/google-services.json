@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "52880152633",
+    "firebase_url": "https://eat-it-da286.firebaseio.com",
+    "project_id": "eat-it-da286",
+    "storage_bucket": "eat-it-da286.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52880152633:android:2bd3a758b545c99f",
+        "android_client_info": {
+          "package_name": "com.zainco.eat_it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52880152633-7fu45m57jjukn2egpoekpc4veslone37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zainco.eat_it",
+            "certificate_hash": "a113fa38701312cb06dbe7aec2f30e93239b8664"
+          }
+        },
+        {
+          "client_id": "52880152633-s4uvtq17dfsqp6vaolc31djf09jti1lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMpuoBA4_RWjpGeofq8HvFNa20HlOAhmk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52880152633-s4uvtq17dfsqp6vaolc31djf09jti1lo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
