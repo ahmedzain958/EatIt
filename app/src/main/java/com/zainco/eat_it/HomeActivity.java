@@ -1,13 +1,12 @@
 package com.zainco.eat_it;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,12 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +42,7 @@ public class HomeActivity extends AppCompatActivity
     DatabaseReference databaseReference;
     RecyclerView recyclerViewMenu;
     LinearLayoutManager linearLayoutManager;
+    private FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +93,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void loadMenu() {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+     /*   databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getChildrenCount() != 0) {
@@ -108,42 +106,26 @@ public class HomeActivity extends AppCompatActivity
                 Log.i("TAGGGG", "onCancelled", databaseError.toException());
             }
         });
-
-        /*Query query = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child("Category");
-        FirebaseRecyclerOptions<Category> options =
-                new FirebaseRecyclerOptions.Builder<Category>()
-                        .setQuery(query, Category.class)
-                        .build();
-        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
-            @Override
-            public MenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.menu_item, parent, false);
-
-                return new MenuViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull Category model) {
-                holder.menu_name.setText(model.getName());
-                Picasso.with(getBaseContext()).load(model.getImage())
-                        .into(holder.menu_image);
-                final Category clickItem = model;
-                holder.setItemClickListener(new ItemClickListener() {
+*/
+        adapter =
+                new FirebaseRecyclerAdapter<Category, MenuViewHolder>(
+                        Category.class, R.layout.menu_item, MenuViewHolder.class, databaseReference) {
                     @Override
-                    public void onCLick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(HomeActivity.this, "" + clickItem.getName(), Toast.LENGTH_SHORT).show();
+                    protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
+                        viewHolder.menu_name.setText(model.getName());
+                        Picasso.with(HomeActivity.this).load(model.getImage()).into(viewHolder.menu_image);
+                        final Category s = model;
+                        viewHolder.setItemClickListener(new ItemClickListener() {
+                            @Override
+                            public void onCLick(View view, int position, boolean isLongClick) {
+                                startActivity(new Intent(HomeActivity.this, FoodListActivity.class)
+                                        .putExtra("CategoryId", adapter.getRef(position).getKey()));
+                            }
+                        });
                     }
+                };
+        recyclerViewMenu.setAdapter(adapter);
 
-                });
-            }
-
-        };
-
-        recyclerViewMenu.setAdapter(adapter);*/
     }
 
     @Override
@@ -153,7 +135,7 @@ public class HomeActivity extends AppCompatActivity
 
     private void collectCategories(Map<String, Object> categories) {
 
-        ArrayList<Category> categories1 = new ArrayList<>();
+       /* ArrayList<Category> categories1 = new ArrayList<>();
         for (Map.Entry<String, Object> entry : categories.entrySet()) {
             Map singleUser = (Map) entry.getValue();
             categories1.add(new Category((String) singleUser.get("Image"), (String) singleUser.get("Name"), entry.getKey().toString()));
@@ -161,7 +143,7 @@ public class HomeActivity extends AppCompatActivity
         if (categories1 != null && categories.size() > 0) {
             CategoryAdapter categoryAdapter = new CategoryAdapter(HomeActivity.this, categories1);
             recyclerViewMenu.setAdapter(categoryAdapter);
-        }
+        }*/
     }
 
     @Override

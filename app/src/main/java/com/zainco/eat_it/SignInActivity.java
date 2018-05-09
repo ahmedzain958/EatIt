@@ -45,6 +45,7 @@ public class SignInActivity extends AppCompatActivity {
                         progressbar.setVisibility(View.GONE);
                         if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                            user.setPhone(edtPhone.getText().toString());
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
                                 Common.currentUser = user;
                                 startActivity(new Intent(SignInActivity.this, HomeActivity.class));

@@ -42,8 +42,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onCLick(View view, int position, boolean isLongClick) {
-                Log.d("TAGG", category.getId());
-                context.startActivity(new Intent(context, FoodListActivity.class).putExtra("CategoryId", category.getId()));
+               /* Log.d("TAGG", category.getId());
+                context.startActivity(new Intent(context, FoodListActivity.class).putExtra("CategoryId", category.getId()));*/
             }
         });
         holder.menu_name.setText(categories.get(position).getName());

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
+import com.zainco.eat_it.FoodDetailActivity;
 import com.zainco.eat_it.FoodListActivity;
 import com.zainco.eat_it.Interface.ItemClickListener;
 import com.zainco.eat_it.R;
@@ -43,6 +44,7 @@ public class FoodsAdapter extends RecyclerView.Adapter<FoodViewHolder> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onCLick(View view, int position, boolean isLongClick) {
+                context.startActivity(new Intent(context, FoodDetailActivity.class));
             }
         });
         holder.food_name.setText(foods.get(position).getName());
